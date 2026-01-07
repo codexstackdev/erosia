@@ -8,11 +8,11 @@ import { Input } from "@/components/ui/input";
 import { Play, Flame, Eye, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { getVideos } from "./hooks/action";
+import { getVideos } from "@/app/hooks/action";
 import { toast } from "sonner";
-import Loading from "./components/loading";
-import { useRouter } from "next/navigation";
-import VideoCard from "./components/videoCard";
+import Loading from "@/app/components/loading";
+import { useParams, useRouter } from "next/navigation";
+import VideoCard from "@/app/components/videoCard";
 
 interface dataProp {
   duration: string;
@@ -20,22 +20,25 @@ interface dataProp {
   thumbnail: string;
   title: string;
   postId: string;
-  tags: string[];
+  tags: [string];
 }
 
 export default function ErosiaBrowse() {
   const { theme, setTheme } = useTheme();
-  const router = useRouter();
   const [data, setData] = useState<dataProp[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const params = useParams();
+  const page = params.num;
   const totalPages = 8;
+  const router = useRouter();
 
   useEffect(() => {
     const getList = async () => {
       try {
-        const data = await getVideos(currentPage);
-        if (data.length !== 0) setData(data);
+        const data = await getVideos(parseInt(page as string));
+        if (data.length != 0) {
+          setData(data);
+        }
       } catch (error) {
         const err = error instanceof Error ? error.message : "Server Error";
         toast.error(err);
@@ -44,14 +47,13 @@ export default function ErosiaBrowse() {
       }
     };
     getList();
-  }, [currentPage]);
-
-  const handlePageClick = (page: number) => {
-    setCurrentPage(page);
-    router.push(`/page/${page}`);
-  };
+  }, []);
 
   if (loading) return <Loading />;
+
+  const handlePageClick = (page: number) => {
+    router.push(`/page/${page}`);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -59,12 +61,26 @@ export default function ErosiaBrowse() {
         <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="text-xl font-bold tracking-tight">Erosia</span>
-            <Badge variant="secondary" className="hidden sm:inline-flex">FUCK HOES</Badge>
+            <Badge variant="secondary" className="hidden sm:inline-flex">
+              FUCK HOES
+            </Badge>
           </div>
           <div className="flex items-center gap-2">
-            <Input placeholder="Search scenes, tags, performers" className="hidden sm:block w-65" />
-            <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            <Input
+              placeholder="Search scenes, tags, performers"
+              className="hidden sm:block w-65"
+            />
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Toggle theme"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -87,7 +103,13 @@ export default function ErosiaBrowse() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.03 }}
             >
-              <VideoCard thumbnail={vid.thumbnail} title={vid.title} duration={vid.duration} postId={vid.postId} tags={vid.tags[0]} />
+              <VideoCard
+                thumbnail={vid.thumbnail}
+                title={vid.title}
+                duration={vid.duration}
+                postId={vid.postId}
+                tags={vid.tags[0]}
+              />
             </motion.div>
           ))}
         </div>
@@ -97,7 +119,9 @@ export default function ErosiaBrowse() {
             <Button
               key={i + 1}
               size="sm"
-              variant={currentPage === i + 1 ? "default" : "outline"}
+              variant={
+                parseInt(page as string) === i + 1 ? "default" : "outline"
+              }
               onClick={() => handlePageClick(i + 1)}
             >
               {i + 1}
@@ -108,7 +132,9 @@ export default function ErosiaBrowse() {
 
       <footer className="border-t border-border">
         <div className="mx-auto max-w-7xl px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Erosia • 18+</p>
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Erosia • 18+
+          </p>
         </div>
       </footer>
     </div>
