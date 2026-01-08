@@ -21,6 +21,7 @@ interface VideoProps {
 }
 
 const parseDuration = (iso: string) => {
+  if(!iso) return "00:00";
   const regex = /P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/;
   const match = iso.match(regex);
   if (!match) return "00:00";

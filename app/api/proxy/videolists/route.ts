@@ -8,8 +8,8 @@ export async function GET(req: NextRequest) {
   try {
     const html = await cloudscraper({
       method: "GET",
-      url: parseInt(page as string) >= 1 ? `https://rapbeh.cx/page/${page}/` : `https://rapbeh.cx/`,
-      headers: {
+      url: `https://kayatan.org/page/${parseInt(page as string)}`,
+      headers: {  
         "User-Agent":
           "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile Safari/604.1",
         Accept:
@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
           title: article.find("header.entry-header span").text().trim(),
           duration: article.find(".duration").text().trim(),
           thumbnail:
-            article.find("img.video-main-thumb").attr("src") ||
+            article.find("img").attr("data-src") ||
             article.attr("data-main-thumb") ||
             "",
           category:
