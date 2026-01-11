@@ -29,7 +29,7 @@ export default function ErosiaBrowse() {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const page = params.num;
-  const totalPages = 37;
+  const totalPages = 66;
   const router = useRouter();
 
   useEffect(() => {
@@ -114,7 +114,7 @@ export default function ErosiaBrowse() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 max-h-50 overflow-scroll overflow-x-hidden customScrollbar">
           {Array.from({ length: totalPages }, (_, i) => (
             <Button
               key={i + 1}

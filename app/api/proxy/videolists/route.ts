@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   try {
     const html = await cloudscraper({
       method: "GET",
-      url: `https://kayatan.org/page/${parseInt(page as string)}`,
+      url: `https://kantotplus.com/page/${parseInt(page as string)}`,
       headers: {  
         "User-Agent":
           "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile Safari/604.1",
