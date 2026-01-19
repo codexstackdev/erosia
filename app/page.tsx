@@ -59,12 +59,28 @@ export default function ErosiaBrowse() {
         <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="text-xl font-bold tracking-tight">Erosia</span>
-            <Badge variant="secondary" className="hidden sm:inline-flex">FUCK HOES</Badge>
+            <Badge variant="secondary" className="hidden sm:inline-flex">
+              FUCK HOES
+            </Badge>
           </div>
           <div className="flex items-center gap-2">
-            <Input placeholder="Search scenes, tags, performers" className="hidden sm:block w-65" />
-            <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            <Button
+              onClick={() => router.push("/sarappaglibre")}
+              variant={"link"}
+            >
+              SarapBitch
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Toggle theme"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -82,12 +98,20 @@ export default function ErosiaBrowse() {
           {data.map((vid, i) => (
             <motion.div
               key={i}
-              onClick={() => router.push(`/lust/${btoa(encodeURIComponent(vid.slug))}`)}
+              onClick={() =>
+                router.push(`/lust/${btoa(encodeURIComponent(vid.slug))}`)
+              }
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.03 }}
             >
-              <VideoCard thumbnail={vid.thumbnail} title={vid.title} duration={vid.duration} postId={vid.postId} tags={vid.tags[0]} />
+              <VideoCard
+                thumbnail={vid.thumbnail}
+                title={vid.title}
+                duration={vid.duration}
+                postId={vid.postId}
+                tags={vid.tags[0]}
+              />
             </motion.div>
           ))}
         </div>
@@ -108,7 +132,9 @@ export default function ErosiaBrowse() {
 
       <footer className="border-t border-border">
         <div className="mx-auto max-w-7xl px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Erosia • 18+</p>
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Erosia • 18+
+          </p>
         </div>
       </footer>
     </div>

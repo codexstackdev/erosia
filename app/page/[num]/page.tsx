@@ -66,10 +66,12 @@ export default function ErosiaBrowse() {
             </Badge>
           </div>
           <div className="flex items-center gap-2">
-            <Input
-              placeholder="Search scenes, tags, performers"
-              className="hidden sm:block w-65"
-            />
+            <Button
+              onClick={() => router.push("/sarappaglibre")}
+              variant={"link"}
+            >
+              SarapBitch
+            </Button>
             <Button
               variant="ghost"
               size="icon"
@@ -98,7 +100,9 @@ export default function ErosiaBrowse() {
           {data.map((vid, i) => (
             <motion.div
               key={i}
-              onClick={() => router.push(`/lust/${btoa(encodeURIComponent(vid.slug))}`)}
+              onClick={() =>
+                router.push(`/lust/${btoa(encodeURIComponent(vid.slug))}`)
+              }
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.03 }}
