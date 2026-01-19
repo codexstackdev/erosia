@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
     const slug = searchParams.get("slug");
 
-    const url = `https://kantotplus.com/${slug}/`;
+    const url = `https://kayatan.org/${slug}/`;
 
     const html = await cloudscraper({
       method: "GET",

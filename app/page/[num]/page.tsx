@@ -29,7 +29,7 @@ export default function ErosiaBrowse() {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const page = params.num;
-  const totalPages = 66;
+  const totalPages = 37;
   const router = useRouter();
 
   useEffect(() => {

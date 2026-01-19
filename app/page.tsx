@@ -29,7 +29,7 @@ export default function ErosiaBrowse() {
   const [data, setData] = useState<dataProp[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 66;
+  const totalPages = 37;
 
   useEffect(() => {
     const getList = async () => {
