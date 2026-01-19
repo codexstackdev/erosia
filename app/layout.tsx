@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster/>
-          {/* <DisableDevtools/> */}
+          <DisableDevtools/>
           {children}
         </ThemeProvider>
       </body>
